@@ -1,11 +1,13 @@
 <div class="card">
-  <%#= link_to image_tag(prototype.image, class: :card__img), prototype_path(prototype.id) %>
   <div class="card__body">
     <%= link_to tweet.title, tweets_path(tweet.id), class: :card__title%>
+    <%= link_to tweet.user.nickname, class: :card__user %>
+    <audio src= "<%= "#{tweet.voice}" %>" controls="">
+    <a src="<%= "#{tweet.voice}" %>">ダウンロード</a>
+    </audio>
     <p class="card__summary">
       <%= tweet.description %>
     </p>
-    <%= link_to tweet.user.nickname, class: :card__user %>
     <%#= link_to tweet.user.nickname, user_path(tweet.id), class: :card__user %>
   </div>
 </div>
