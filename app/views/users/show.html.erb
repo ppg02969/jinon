@@ -4,6 +4,9 @@
       <h2 class="page-heading">
         <%= "#{@user.nickname}さんの情報"%>
       </h2>
+      <% if user_signed_in? && current_user == @user %>
+        <%= link_to "編集する", edit_user_path(@user.id)%>
+      <% end %>
       <table class="table">
         <tbody>
           <tr>

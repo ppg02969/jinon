@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card__body">
     <%= link_to tweet.title, tweets_path(tweet.id), class: :card__title%>
-    <%= link_to tweet.user.nickname, class: :card__user %>
+    <%= link_to tweet.user.nickname, user_path(tweet.id), class: :card__user %>
     <audio src= "<%= "#{tweet.voice}" %>" controls="">
     <a src="<%= "#{tweet.voice}" %>">ダウンロード</a>
     </audio>
