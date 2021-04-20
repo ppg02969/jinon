@@ -1,0 +1,31 @@
+<main class="main">
+  <div class="inner">
+    <div class="prototype__wrapper">
+      <p class="prototype__hedding">
+        <%= @tweet.title %>
+      </p>
+      <%= link_to @tweet.user.nickname, user_path(@tweet.user_id), class: :prototype__user %>
+      <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
+        <% if user_signed_in? && current_user == @tweet.user %>
+        <div class="prototype__manage">
+          <%= link_to "編集する", edit_tweet_path(@tweet.id), class: :prototype__btn %>
+          <%= link_to "削除する", tweet_path(@tweet.id), method: :delete, class: :prototype__btn %>
+        </div>
+        <% end %>
+      <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
+      <div class="prototype__image">
+        <audio src= "<%= "#{@tweet.voice}" %>" controls="">
+          <a src="<%= "#{@tweet.voice}" %>">ダウンロード</a>
+        </audio>
+      </div>
+      <div class="prototype__body">
+        <div class="prototype__detail">
+          <p class="detail__title">説明</p>
+          <p class="detail__message">
+            <%= @tweet.description %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
