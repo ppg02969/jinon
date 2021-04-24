@@ -1,4 +1,6 @@
 class TweetsController < ApplicationController
+  before_action :move_to_index, only: :edit
+
   def index
     @tweets = Tweet.all
   end
@@ -21,6 +23,16 @@ class TweetsController < ApplicationController
   end
 
   def edit
+    @tweet = Tweet.find(params[:id])
+  end
+
+  def update
+    @tweet = Tweet.find(params[:id])
+    if @tweet.update(tweet_params)
+      redirect_to tweet_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -33,4 +45,12 @@ class TweetsController < ApplicationController
   def tweet_params
     params.require(:tweet).permit(:title, :description, :voice).merge(user_id: current_user.id)
   end
+
+  def move_to_index
+    tweet = Tweet.find(params[:id])
+    unless tweet.user_id == current_user.id
+      redirect_to action: :index
+    end
+  end
+
 end
